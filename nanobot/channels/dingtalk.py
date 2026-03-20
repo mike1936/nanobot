@@ -519,10 +519,23 @@ class DingTalkChannel(BaseChannel):
             logger.info("DingTalk inbound: {} from {}", content, sender_name)
             is_group = conversation_type == "2" and conversation_id
             chat_id = f"group:{conversation_id}" if is_group else sender_id
+
+            if is_group:
+                content = (
+                    f"SenderName: {sender_name}\n"
+                    f"SenderId: {sender_id}\n"
+                    f"Message: {content}"
+                )
+            else:
+                content = (
+                    f"SenderName: {sender_name}"
+                    f"Message: {content}"
+                )
+
             await self._handle_message(
                 sender_id=sender_id,
                 chat_id=chat_id,
-                content=str(content),
+                content=content,
                 metadata={
                     "sender_name": sender_name,
                     "platform": "dingtalk",
