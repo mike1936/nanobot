@@ -96,11 +96,13 @@ packages = ["nanobot"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "bridge" = "nanobot/bridge"
+"weixin-bridge" = "nanobot/weixin-bridge"
 
 [tool.hatch.build.targets.sdist]
 include = [
     "nanobot/",
     "bridge/",
+    "weixin-bridge/",
     "README.md",
     "LICENSE",
 ]
